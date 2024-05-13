@@ -1,0 +1,117 @@
+"""
+At the command line, only need to run once to install the package via pip:
+
+$ pip install google-generativeai
+"""
+
+from pathlib import Path
+import hashlib
+import google.generativeai as genai
+from google.colab import userdata
+
+secret_key_api = userdata.get("secret_key")
+
+genai.configure(api_key=secret_key_api)
+
+# Set up the model
+generation_config = {
+  "temperature": 0.9,
+  "top_p": 0.95,
+  "top_k": 32,
+  "candidate_count": 1,
+  "temperature": 0.5,
+}
+
+safety_settings = [
+  {
+    "category": "HARM_CATEGORY_HARASSMENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_HATE_SPEECH",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+]
+
+
+model = genai.GenerativeModel(model_name="gemini-1.0-pro",
+                              generation_config=generation_config,
+                              safety_settings=safety_settings)
+
+#response = model.generate_content("Que empresa criou o modelo de IA Gemini?")
+#response.text
+
+chat = model.start_chat(history=[])
+
+prompt = input('Esperando prompt: ')
+
+while prompt != "fim":
+  response = chat.send_message(prompt)
+  print("Resposta:", response.text, '\n\n')
+  prompt = input('Esperando prompt: ')"""
+At the command line, only need to run once to install the package via pip:
+
+$ pip install google-generativeai
+"""
+
+from pathlib import Path
+import hashlib
+import google.generativeai as genai
+from google.colab import userdata
+
+secret_key_api = userdata.get("secret_key")
+
+genai.configure(api_key=secret_key_api)
+
+# Set up the model
+generation_config = {
+  "temperature": 0.9,
+  "top_p": 0.95,
+  "top_k": 32,
+  "candidate_count": 1,
+  "temperature": 0.5,
+}
+
+safety_settings = [
+  {
+    "category": "HARM_CATEGORY_HARASSMENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_HATE_SPEECH",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+]
+
+
+model = genai.GenerativeModel(model_name="gemini-1.0-pro",
+                              generation_config=generation_config,
+                              safety_settings=safety_settings)
+
+#response = model.generate_content("Que empresa criou o modelo de IA Gemini?")
+#response.text
+
+chat = model.start_chat(history=[])
+
+prompt = input('Esperando prompt: ')
+
+while prompt != "fim":
+  response = chat.send_message(prompt)
+  print("Resposta:", response.text, '\n\n')
+  prompt = input('Esperando prompt: ')
